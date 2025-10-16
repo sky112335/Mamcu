@@ -1,0 +1,2465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MAMCU - Masasi Mtwara Cooperative Union</title>
+  <link rel="icon" type="image/png" href="assets/mamcu-logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="preload" as="image" href="assets/background.png">
+  <style id="app-style">
+    :root {
+      --primary: #1a237e;
+      --primary-dark: #0d1642;
+      --primary-light: #534bae;
+      --secondary: #d4a72c;
+      --secondary-dark: #a17900;
+      --secondary-light: #ffd95b;
+      --dark-text: #333;
+      --light-text: #fff;
+      --light-bg: #f8f9fa;
+      --dark-bg: #212121;
+      --body-bg: #fff;
+      --card-bg: #fff;
+      --navbar-bg: #fff;
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] {
+      --primary: #534bae;
+      --primary-dark: #1a237e;
+      --primary-light: #8376df;
+      --dark-text: #e0e0e0;
+      --light-text: #ffffff;
+      --light-bg: #333;
+      --dark-bg: #f8f9fa;
+      --body-bg: #121212;
+      --card-bg: #1e1e1e;
+      --navbar-bg: #1a1a1a;
+    }
+
+    /* Dark theme specific overrides */
+    [data-theme="dark"] .nav-link {
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .nav-link:hover {
+      color: var(--primary-light);
+    }
+
+    [data-theme="dark"] .card {
+      background-color: var(--card-bg);
+      color: var(--dark-text);
+    }
+
+    [data-theme="dark"] .navbar {
+      background-color: var(--navbar-bg);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="dark"] .navbar-brand {
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .navbar-brand span {
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .navbar-brand:hover {
+      color: var(--primary-light);
+    }
+
+    [data-theme="dark"] .card-title,
+    [data-theme="dark"] .section-title,
+    [data-theme="dark"] h1,
+    [data-theme="dark"] h2,
+    [data-theme="dark"] h3,
+    [data-theme="dark"] h4,
+    [data-theme="dark"] h5,
+    [data-theme="dark"] h6 {
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .card-text,
+    [data-theme="dark"] p {
+      color: var(--dark-text);
+    }
+
+    /* Floating Election Banner Styles */
+    .election-banner {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 260px;
+      animation: bounce 3s infinite;
+    }
+
+    .election-banner img {
+      width: 45px;
+      height: auto;
+    }
+
+    .election-banner-content h4 {
+      color: var(--primary);
+      font-size: 1rem;
+      margin: 0 0 3px 0;
+      font-weight: 700;
+    }
+
+    .election-banner-content p {
+      color: var(--dark-text);
+      font-size: 0.9rem;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    [data-theme="dark"] .election-banner {
+      background: rgba(26, 35, 126, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    [data-theme="dark"] .election-banner-content h4 {
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .election-banner-content p {
+      color: var(--light-text);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-15px);
+      }
+      60% {
+        transform: translateY(-7px);
+      }
+    }
+
+    /* Apply theme variables */
+    body {
+      background-color: var(--body-bg);
+      color: var(--dark-text);
+      transition: all 0.3s ease;
+    }
+
+    .navbar {
+      background-color: var(--navbar-bg);
+      transition: all 0.3s ease;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      transition: all 0.3s ease;
+    }
+
+    /* Theme Toggle Button Styles */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: inherit;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary);
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .theme-toggle:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .theme-toggle i {
+      font-size: 1.2rem;
+      pointer-events: none;
+    }
+
+    [data-theme="dark"] .theme-toggle:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Language Toggle */
+    #langToggle {
+      cursor: pointer;
+    }
+
+    /* Language Menu Styles */
+    .lang-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--body-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 0.5rem;
+      display: none;
+      z-index: 1000;
+    }
+
+    .lang-menu.show {
+      display: block;
+    }
+
+    .lang-menu button {
+      display: block;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: none;
+      color: var(--dark-text);
+      cursor: pointer;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+
+    .lang-menu button:hover {
+      background-color: rgba(0,0,0,0.05);
+    }
+
+    .lang-menu button.active {
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark-text);
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+    
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand img {
+      height: 45px;
+    }
+    
+    .nav-link {
+      color: var(--dark-text);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      position: relative;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 80%;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+    
+    .btn-secondary {
+      background-color: var(--secondary);
+      border-color: var(--secondary);
+      color: #fff;
+    }
+    
+    .btn-secondary:hover {
+      background-color: var(--secondary-dark);
+      border-color: var(--secondary-dark);
+    }
+    
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/background.png');
+      background-size: cover;
+      background-position: center;
+      min-height: 80vh;
+      color: var(--light-text);
+      display: flex;
+      align-items: center;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0;
+      text-align: left;
+    }
+    
+    .section {
+      padding: 5rem 0;
+    }
+    
+    .section-title {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 3px;
+      background: var(--primary);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .card {
+      border: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background-color: var(--card-bg);
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .crop-card img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    [data-theme="dark"] .card {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    [data-theme="dark"] .card-body {
+      background-color: var(--card-bg);
+    }
+
+    [data-theme="dark"] .card-title {
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .card-text {
+      color: var(--light-text);
+      opacity: 0.9;
+    }
+
+    [data-theme="dark"] .bg-light {
+      background-color: var(--navbar-bg) !important;
+    }
+
+    [data-theme="dark"] #crops .section-title {
+      color: var(--light-text);
+    }
+
+    /* Modal Styles */
+    .modal-content {
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .modal-header {
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding: 1.5rem;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-footer {
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding: 1.5rem;
+    }
+
+    [data-theme="dark"] .modal-content {
+      background-color: var(--card-bg);
+      color: var(--dark-text);
+    }
+
+    [data-theme="dark"] .modal-header,
+    [data-theme="dark"] .modal-footer {
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    [data-theme="dark"] .modal-title {
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .btn-close {
+      filter: invert(1) grayscale(100%) brightness(200%);
+    }
+    
+    .service-icon {
+      color: var(--primary);
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .values-icon {
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      background-color: var(--primary-light);
+      color: var(--light-text);
+      border-radius: 50%;
+      font-size: 2rem;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .farmers-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://cdn.pixabay.com/photo/2016/11/08/05/15/agriculture-1807581_1280.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .farmers-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://cdn.pixabay.com/photo/2016/11/08/05/15/agriculture-1807581_1280.jpg');
+    }
+
+    [data-theme="dark"] .farmers-section h2,
+    [data-theme="dark"] .farmers-section h3,
+    [data-theme="dark"] .farmers-section li {
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .farmers-section .card {
+      background-color: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    [data-theme="dark"] .farmers-section .bg-primary {
+      background-color: var(--primary-light) !important;
+    }
+
+    [data-theme="dark"] .farmers-section .text-dark {
+      color: var(--light-text) !important;
+    }
+
+    [data-theme="dark"] .farmers-section .text-success {
+      color: #4caf50 !important;
+    }
+    
+    .market-info {
+      background-color: var(--light-bg);
+    }
+    
+    .price-ticker {
+      padding: 1rem;
+      background: var(--primary-light);
+      color: var(--light-text);
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    
+    .ticker-item {
+      padding: 0 1rem;
+      display: inline-block;
+    }
+    
+    .news-card {
+      margin-bottom: 2rem;
+      height: 100%;
+    }
+    
+    .news-card img {
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .news-date {
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    .contact-section {
+      position: relative;
+    }
+    
+    .contact-form {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+    
+    .copy-tooltip {
+      position: absolute;
+      background: var(--primary);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 5px;
+      white-space: nowrap;
+      animation: fadeInOut 2s ease;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    [data-theme="dark"] .contact-form {
+      background: var(--card-bg);
+      color: var(--dark-text);
+    }
+
+    [data-theme="dark"] .form-control {
+      background-color: var(--navbar-bg);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: var(--dark-text);
+    }
+
+    [data-theme="dark"] .form-control:focus {
+      background-color: var(--navbar-bg);
+      border-color: var(--primary);
+      color: var(--dark-text);
+      box-shadow: 0 0 0 0.25rem rgba(83, 75, 174, 0.25);
+    }
+
+    /* Dark theme styles for How It Works section */
+    [data-theme="dark"] .farmers-section .card.bg-white {
+      background-color: var(--card-bg) !important;
+    }
+
+    [data-theme="dark"] .farmers-section .card .text-dark {
+      color: var(--light-text) !important;
+    }
+
+    [data-theme="dark"] .farmers-section .bg-primary.rounded-circle {
+      background-color: var(--primary-light) !important;
+    }
+
+    [data-theme="dark"] .farmers-section .card p.text-dark {
+      color: var(--light-text) !important;
+      opacity: 0.9;
+    }
+    
+    .contact-info {
+      padding: 2rem;
+    }
+    
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .contact-info-item i {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      background: var(--primary-light);
+      color: var(--light-text);
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+    
+    footer {
+      background: var(--dark-bg);
+      color: var(--light-text);
+      padding: 3rem 0 1rem;
+    }
+
+    [data-theme="dark"] footer {
+      background: var(--navbar-bg);
+      color: var(--light-text);
+    }
+    
+    footer h5 {
+      color: var(--light-text);
+    }
+
+    footer p {
+      color: var(--light-text);
+      opacity: 0.9;
+    }
+    
+    .social-links a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      background: var(--primary);
+      color: var(--light-text);
+      text-align: center;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+    
+    .footer-links a {
+      color: var(--light-text);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--light-text);
+      opacity: 1;
+      text-decoration: none;
+    }
+
+    [data-theme="dark"] .footer-links a {
+      color: var(--light-text);
+      opacity: 0.8;
+    }
+
+    [data-theme="dark"] .footer-links a:hover {
+      opacity: 1;
+    }
+    
+    .copyright {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    [data-theme="dark"] .copyright {
+      border-top-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    /* Bouncing Email Button Styles */
+    .bounce-button {
+      position: fixed;
+      right: 20px;
+      top: 100px; /* Position it just below the header */
+      z-index: 1000;
+      animation: bounce 2s infinite;
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bounce-button:hover {
+      background-color: var(--primary-dark);
+      color: white;
+      animation: none;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        min-height: 60vh;
+      }
+      
+      .section {
+        padding: 3rem 0;
+      }
+      
+      .crop-card, .news-card {
+        margin-bottom: 2rem;
+      }
+
+      .bounce-button {
+        right: 10px;
+        padding: 10px 20px;
+      }
+    }
+
+    /* Back to Top Button Styles */
+    .back-to-top {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      width: 45px;
+      height: 45px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 9999;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+
+    .back-to-top i {
+      font-size: 1.2rem;
+    }
+
+    .back-to-top:hover {
+      background-color: var(--primary-dark);
+      color: white;
+      transform: translateY(-3px);
+      text-decoration: none;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    [data-theme="dark"] .back-to-top {
+      background-color: var(--primary-light);
+    }
+
+    [data-theme="dark"] .back-to-top:hover {
+      background-color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .back-to-top {
+        width: 35px;
+        height: 35px;
+        left: 15px;
+        bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="javascript:void(0)">
+        <img src="assets/mamcu-logo.png" alt="MAMCU Logo" class="img-fluid">
+        <span class="ms-2 fw-bold">MAMCU LTD</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about" data-translate="about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#crops" data-translate="crops">Our Crops</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services" data-translate="services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#farmers" data-translate="farmers">Farmers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#gallery" data-translate="gallery">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#news" data-translate="news">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact" data-translate="contact">Contact</a>
+          <li class="nav-item">
+            <button class="nav-link theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+              <i class="fas fa-moon"></i>
+            </button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0);" id="langToggle" role="button">
+              <span class="current-lang">EN</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-white ms-2 px-3" href="https://mamcu.agricoop.co.tz/login" target="_blank" rel="noopener noreferrer"><span data-translate="staffLogin">Staff Login</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Bouncing Email Button -->
+  <a href="https://webmail.taxacloud.com/?_task=logout&_token=token" class="bounce-button" target="_blank" rel="noopener noreferrer">
+    <i class="fas fa-envelope"></i>
+    Email
+  </a>
+
+  <!-- Election Banner -->
+  <div class="election-banner">
+    <img src="assets/Nec_logo.png" alt="NEC Logo">
+    <div class="election-banner-content">
+      <h4>UCHAGUZI MKUU</h4>
+      <p>Okt 29, 2025 Jitokeze Kupiga Kura</p>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="display-4 fw-bold mb-4" data-translate="heroTitle">Empowering Farmers, Growing Communities</h1>
+        <p class="lead mb-4" data-translate="heroText">MAMCU is a farmer-centered cooperative that works through AMCOS to collect and market cashew nuts, sesame seeds, and pigeon peas. Together, we ensure reliable markets, fair payments, and sustainable farming practices.</p>
+        <div class="d-flex justify-content-start gap-3">
+          <a href="#about" class="btn btn-primary btn-lg px-4" data-translate="learnMore">Learn More</a>
+          <a href="#contact" class="btn btn-outline-light btn-lg px-4" data-translate="contactUs">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title" data-translate="aboutMAMCU">About MAMCU</h2>
+      <div class="row align-items-center">
+          <div class="col-md-6 mb-4 mb-md-0">
+          <img src="assets/slide 05.jpg" alt="MAMCU Farmers" class="img-fluid rounded shadow" loading="lazy">
+        </div>
+        <div class="col-md-6">
+          <h3 class="mb-4" data-translate="ourMission">Our Mission</h3>
+          <p data-translate="missionText">At Masasi Mtwara Cooperative Union (MAMCU), our mission is to empower local farmers by providing reliable markets, ensuring fair and transparent payments, and offering extensive training and cooperative support.</p>
+          <p>Founded by and for farmers, MAMCU works through Agricultural Marketing Co-operative Societies (AMCOS) to collect and market high-quality cashew nuts, sesame seeds, and pigeon peas that meet international standards.</p>
+          
+          <h3 class="mt-4 mb-3" data-translate="ourValues">Our Values</h3>
+          <div class="row text-center mt-4">
+            <div class="col-6 col-md-3 mb-4">
+              <div class="values-icon">
+                <i class="fas fa-hands-helping"></i>
+              </div>
+              <h5 data-translate="unity">Unity</h5>
+            </div>
+            <div class="col-6 col-md-3 mb-4">
+              <div class="values-icon">
+                <i class="fas fa-lock-open"></i>
+              </div>
+              <h5 data-translate="transparency">Transparency</h5>
+            </div>
+            <div class="col-6 col-md-3 mb-4">
+              <div class="values-icon">
+                <i class="fas fa-seedling"></i>
+              </div>
+              <h5 data-translate="sustainability">Sustainability</h5>
+            </div>
+            <div class="col-6 col-md-3 mb-4">
+              <div class="values-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h5 data-translate="growth">Growth</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Crops Section -->
+  <section class="section bg-light" id="crops">
+    <div class="container">
+      <h2 class="section-title" data-translate="ourCrops">Our Crops</h2>
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <div class="card crop-card h-100">
+            <img src="assets/cashew-nuts.jpg" class="card-img-top" alt="Cashew Nuts" loading="lazy">
+            <div class="card-body">
+              <h4 class="card-title" data-translate="cashewNuts">Cashew Nuts</h4>
+              <p class="card-text" data-translate="cashewText">Our premium cashew nuts are carefully harvested and processed to maintain quality and flavor. We work with farmers to ensure sustainable farming practices and consistent quality.</p>
+              <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#cashewModal">Learn More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card crop-card h-100">
+            <img src="assets/sesame-seeds.jpg" class="card-img-top" alt="Sesame Seeds" loading="lazy">
+            <div class="card-body">
+              <h4 class="card-title">Sesame Seeds</h4>
+              <p class="card-text">MAMCU works with farmers to produce high-quality sesame seeds that meet international standards. Our sesame is known for its rich flavor and nutritional content.</p>
+              <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#sesameModal">Learn More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card crop-card h-100">
+            <img src="assets/pigeon-peas.jpg" class="card-img-top" alt="Pigeon Peas" loading="lazy">
+            <div class="card-body">
+              <h4 class="card-title">Pigeon Peas</h4>
+              <p class="card-text">Our pigeon peas are grown with care by local farmers. Rich in protein and essential nutrients, our pigeon peas are harvested at peak ripeness to ensure quality.</p>
+              <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#pigeonModal">Learn More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card crop-card h-100">
+            <img src="assets/green-gram.png" class="card-img-top" alt="Green Gram" loading="lazy">
+            <div class="card-body">
+              <h4 class="card-title">Green Gram</h4>
+              <p class="card-text">Our green gram is cultivated using sustainable practices to ensure premium quality. Rich in protein and fiber, these nutritious legumes are perfect for health-conscious consumers.</p>
+              <a href="javascript:void(0)" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#greenGramModal">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section" id="services">
+    <div class="container">
+      <h2 class="section-title">Our Services</h2>
+      <div class="row text-center">
+        <div class="col-md-4 mb-4">
+          <div class="service-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h4>Farmer Support</h4>
+          <p>We provide comprehensive support to our member farmers, including access to markets, input supplies, and agricultural extension services.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="service-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <h4>Training Programs</h4>
+          <p>Regular training sessions on modern farming techniques, crop management, post-harvest handling, and quality control to improve yields and product quality.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="service-icon">
+            <i class="fas fa-coins"></i>
+          </div>
+          <h4>Fair Payment Systems</h4>
+          <p>Transparent and fair payment systems that ensure farmers receive competitive prices for their crops in a timely manner.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="service-icon">
+            <i class="fas fa-warehouse"></i>
+          </div>
+          <h4>Storage Facilities</h4>
+          <p>Access to modern storage facilities that help maintain crop quality and allow for strategic marketing decisions.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="service-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h4>Quality Certification</h4>
+          <p>Support in obtaining quality certifications that open doors to premium markets and better prices for farm products.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="service-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h4>Market Access</h4>
+          <p>Connections to local and international markets, ensuring consistent demand for farmers' crops at competitive prices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Farmers Section -->
+  <section class="section farmers-section" id="farmers">
+    <div class="container">
+      <h2 class="section-title">For Our Farmers</h2>
+      <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0">
+          <h3 class="mb-4">Benefits of MAMCU Membership</h3>
+          <ul class="list-unstyled">
+            <li class="mb-3"><i class="fas fa-check-circle me-2 text-success"></i> Access to reliable markets for your crops</li>
+            <li class="mb-3"><i class="fas fa-check-circle me-2 text-success"></i> Fair and transparent payment systems</li>
+            <li class="mb-3"><i class="fas fa-check-circle me-2 text-success"></i> Regular training on improved farming techniques</li>
+            <li class="mb-3"><i class="fas fa-check-circle me-2 text-success"></i> Support in obtaining quality certifications</li>
+            <li class="mb-3"><i class="fas fa-check-circle me-2 text-success"></i> Access to modern storage facilities</li>
+            <li class="mb-3"><i class="fas fa-check-circle me-2 text-success"></i> Collective bargaining power for better prices</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary mt-3">Join MAMCU Today</a>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-white">
+            <div class="card-body">
+              <h4 class="card-title text-dark text-center mb-4">How It Works</h4>
+              <div class="d-flex mb-4">
+                <div class="me-3">
+                  <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <h5 class="m-0">1</h5>
+                  </div>
+                </div>
+                <div>
+                  <h5 class="text-dark">Join Your Local AMCOS</h5>
+                  <p class="text-dark mb-0">Register with your local Agricultural Marketing Co-operative Society (AMCOS) to become a member of MAMCU.</p>
+                </div>
+              </div>
+              <div class="d-flex mb-4">
+                <div class="me-3">
+                  <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <h5 class="m-0">2</h5>
+                  </div>
+                </div>
+                <div>
+                  <h5 class="text-dark">Receive Training & Support</h5>
+                  <p class="text-dark mb-0">Participate in training programs on best farming practices, crop management, and quality control.</p>
+                </div>
+              </div>
+              <div class="d-flex mb-4">
+                <div class="me-3">
+                  <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <h5 class="m-0">3</h5>
+                  </div>
+                </div>
+                <div>
+                  <h5 class="text-dark">Deliver Your Crops</h5>
+                  <p class="text-dark mb-0">Bring your harvested crops to the designated collection centers for grading and weighing.</p>
+                </div>
+              </div>
+              <div class="d-flex">
+                <div class="me-3">
+                  <div class="bg-primary rounded-circle text-white d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <h5 class="m-0">4</h5>
+                  </div>
+                </div>
+                <div>
+                  <h5 class="text-dark">Receive Fair Payment</h5>
+                  <p class="text-dark mb-0">Get paid promptly through our transparent payment system at competitive market rates.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section gallery-section" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Our Gallery</h2>
+      <div class="gallery-carousel">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <!-- Gallery Slides -->
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Nane Nane Exhibition" data-description="Our team working at Nane Nane Exhibition">
+                <img src="assets/slide 01 (1).jpeg" alt="MAMCU Activities" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Nane Nane Exhibition</h4>
+                  <p>Our team working at Nane Nane Exhibition</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Community Engagement" data-description="Building stronger partnerships">
+                <img src="assets/slide 01 (2).jpeg" alt="Community Work" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Community Engagement</h4>
+                  <p>Building stronger partnerships</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Farming Activities" data-description="Supporting sustainable agriculture">
+                <img src="assets/slide 02 (1).jpeg" alt="Farming Activities" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Farming Activities</h4>
+                  <p>Supporting sustainable agriculture</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Training Programs" data-description="Knowledge sharing sessions">
+                <img src="assets/slide 02 (2).jpeg" alt="Training Sessions" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Training Programs</h4>
+                  <p>Knowledge sharing sessions</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Field Visits" data-description="Monitoring crop progress">
+                <img src="assets/slide 02 (3).jpeg" alt="Field Visits" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Field Visits</h4>
+                  <p>Monitoring crop progress</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Community Events" data-description="Celebrating our achievements">
+                <img src="assets/slide 02 (4).jpeg" alt="Community Events" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Community Events</h4>
+                  <p>Celebrating our achievements</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Quality Control" data-description="Ensuring premium product quality">
+                <img src="assets/slide 02 (5).jpeg" alt="Quality Control" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Quality Control</h4>
+                  <p>Ensuring premium product quality</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Market Day" data-description="Local farmers bringing their produce">
+                <img src="assets/slide 03.jpg" alt="Market Day" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Market Day</h4>
+                  <p>Local farmers bringing their produce</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Farmer Training" data-description="Capacity building workshop for local farmers">
+                <img src="assets/slide 04.jpg" alt="Farmer Training" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Farmer Training</h4>
+                  <p>Capacity building workshop for local farmers</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Award Winning" data-description="Recognition for excellence in agricultural cooperation">
+                <img src="assets/slide 04 (2).JPG" alt="Award Winning" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Award Winning</h4>
+                  <p>Recognition for excellence in agricultural cooperation</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="gallery-item" onclick="openLightbox(this)" data-title="Community Development" data-description="Supporting local agricultural initiatives">
+                <img src="assets/slide 06.jpg" alt="Community Development" class="img-fluid" loading="lazy">
+                <div class="gallery-caption">
+                  <h4>Community Development</h4>
+                  <p>Supporting local agricultural initiatives</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Navigation buttons -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Gallery Styles */
+    .gallery-section {
+      background-color: var(--light-bg);
+      padding: 5rem 0;
+    }
+
+    .gallery-carousel {
+      position: relative;
+      padding: 20px 0;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .swiper {
+      width: 100%;
+      padding-bottom: 30px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      aspect-ratio: 16/9;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 15px;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+    }
+
+    .gallery-caption h4 {
+      color: white;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .gallery-caption p {
+      color: rgba(255,255,255,0.9);
+      margin: 3px 0 0;
+      font-size: 0.85rem;
+    }
+
+    /* Swiper Navigation Styles */
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: var(--primary);
+      background-color: rgba(255,255,255,0.9);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+      font-size: 16px;
+    }
+
+    .swiper-pagination-bullet {
+      background: var(--primary);
+      opacity: 0.5;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary);
+      opacity: 1;
+    }
+
+    /* Dark theme adjustments */
+    [data-theme="dark"] .gallery-section {
+      background-color: var(--navbar-bg);
+    }
+
+    [data-theme="dark"] .gallery-section .section-title {
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .gallery-item {
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      background-color: var(--card-bg);
+    }
+
+    [data-theme="dark"] .gallery-caption {
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    }
+
+    [data-theme="dark"] .gallery-caption h4,
+    [data-theme="dark"] .gallery-caption p {
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .swiper-button-next,
+    [data-theme="dark"] .swiper-button-prev {
+      background-color: rgba(255,255,255,0.15);
+      color: var(--light-text);
+    }
+
+    [data-theme="dark"] .swiper-pagination-bullet {
+      background: var(--light-text);
+      opacity: 0.5;
+    }
+
+    [data-theme="dark"] .swiper-pagination-bullet-active {
+      background: var(--primary-light);
+      opacity: 1;
+    }
+
+    @media (max-width: 991px) {
+      .gallery-item {
+        aspect-ratio: 3/2;
+      }
+    }
+
+    /* Lightbox Styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding: 40px;
+      box-sizing: border-box;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: lightboxIn 0.3s ease;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.1);
+    }
+
+    .lightbox-caption {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .lightbox-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 15px;
+      cursor: pointer;
+      border: none;
+      font-size: 24px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .lightbox-prev {
+      left: 20px;
+    }
+
+    .lightbox-next {
+      right: 20px;
+    }
+
+    @keyframes lightboxIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .gallery-item {
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-item {
+        aspect-ratio: 4/3;
+      }
+      .gallery-caption {
+        opacity: 1;
+        padding: 10px;
+      }
+      .gallery-caption h4 {
+        font-size: 0.9rem;
+      }
+      .gallery-caption p {
+        font-size: 0.8rem;
+      }
+      .lightbox {
+        padding: 20px;
+      }
+      .lightbox-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+    }
+  </style>
+
+  <!-- News Section -->
+  <section class="section" id="news">
+    <div class="container">
+      <h2 class="section-title">News & Updates</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card news-card h-100">
+            <img src="assets/cashew-nuts.jpg" class="card-img-top" alt="News Image - Cashew Nuts">
+            <div class="card-body">
+              <span class="news-date">June 10, 2025</span>
+              <h5 class="card-title mt-2">MAMCU Secures New Export Deal for Cashew Nuts</h5>
+              <p class="card-text">MAMCU has successfully negotiated a new export agreement that will benefit over 5,000 local farmers...</p>
+              <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsModal1">Read More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card news-card h-100">
+            <img src="assets/community.jpg" class="card-img-top" alt="News Image - Farmer Training">
+            <div class="card-body">
+              <span class="news-date">May 25, 2025</span>
+              <h5 class="card-title mt-2">Farmer Training Program Expands to New Districts</h5>
+              <p class="card-text">Following the success of our pilot training program, MAMCU is expanding its agricultural training...</p>
+              <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsModal2">Read More</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card news-card h-100">
+            <img src="assets/storage.jpeg" class="card-img-top" alt="News Image - New Storage Facility">
+            <div class="card-body">
+              <span class="news-date">April 15, 2025</span>
+              <h5 class="card-title mt-2">New Storage Facility Inaugurated in Masasi</h5>
+              <p class="card-text">MAMCU has opened a new state-of-the-art storage facility in Masasi district, enhancing our capacity...</p>
+              <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsModal3">Read More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <a href="javascript:void(0)" class="btn btn-primary">View All News</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Modals -->
+  <!-- News Modal 1 -->
+  <div class="modal fade" id="newsModal1" tabindex="-1" aria-labelledby="newsModal1Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newsModal1Label">MAMCU Secures New Export Deal for Cashew Nuts</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <img src="assets/cashew-nuts.jpg" alt="Cashew Nuts Export Deal" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+              <p class="text-muted mb-3">Published on June 10, 2025</p>
+              <p>MAMCU has successfully negotiated a new export agreement that will benefit over 5,000 local farmers in the Masasi and Mtwara regions. The deal, valued at several million dollars, represents a significant milestone in our mission to expand market access for our member farmers.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p>The agreement includes provisions for premium pricing, reflecting the high quality of our cashew nuts and sustainable farming practices. This new partnership will see MAMCU supplying premium grade cashews to major markets in Europe and Asia.</p>
+              <p>Key highlights of the deal include:</p>
+              <ul>
+                <li>Guaranteed minimum purchase volumes for the next three seasons</li>
+                <li>Price premiums for certified organic production</li>
+                <li>Technical support for quality improvement</li>
+                <li>Investment in local processing facilities</li>
+              </ul>
+              <p>This achievement reinforces MAMCU's position as a leading agricultural cooperative in Tanzania and demonstrates our commitment to creating sustainable value for our farming communities.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- News Modal 2 -->
+  <div class="modal fade" id="newsModal2" tabindex="-1" aria-labelledby="newsModal2Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newsModal2Label">Farmer Training Program Expands to New Districts</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <img src="assets/community.jpg" alt="Farmer Training Program" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+              <p class="text-muted mb-3">Published on May 25, 2025</p>
+              <p>Following the success of our pilot training program, MAMCU is expanding its agricultural training initiative to reach farmers in five additional districts. This expansion will enable us to share modern farming techniques and sustainable practices with thousands more farmers.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p>The expanded program will focus on:</p>
+              <ul>
+                <li>Sustainable farming practices and organic certification</li>
+                <li>Post-harvest handling and quality management</li>
+                <li>Climate-smart agriculture techniques</li>
+                <li>Financial literacy and farm management</li>
+              </ul>
+              <p>The training program has already shown remarkable results, with participating farmers reporting yield increases of up to 40% and significant improvements in crop quality. This expansion represents MAMCU's ongoing commitment to empowering farmers with knowledge and skills for sustainable agriculture.</p>
+              <p>The program will be implemented in partnership with local agricultural extension officers and international development partners, ensuring comprehensive support for participating farmers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- News Modal 3 -->
+  <div class="modal fade" id="newsModal3" tabindex="-1" aria-labelledby="newsModal3Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newsModal3Label">New Storage Facility Inaugurated in Masasi</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <img src="assets/storage.jpeg" alt="New Storage Facility" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+              <p class="text-muted mb-3">Published on April 15, 2025</p>
+              <p>MAMCU has opened a new state-of-the-art storage facility in Masasi district, enhancing our capacity to store and process agricultural products. This modern facility represents a significant investment in our infrastructure and will play a crucial role in maintaining product quality.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p>The new facility features:</p>
+              <ul>
+                <li>Climate-controlled storage areas with 5000-ton capacity</li>
+                <li>Modern quality testing laboratory</li>
+                <li>Automated sorting and grading equipment</li>
+                <li>Sustainable energy systems including solar power</li>
+              </ul>
+              <p>This facility will help reduce post-harvest losses and ensure consistent quality of our products throughout the year. It includes advanced humidity control systems and pest management features, setting new standards for agricultural storage in the region.</p>
+              <p>The inauguration ceremony was attended by local government officials, farmer representatives, and international partners, highlighting the importance of this investment for the region's agricultural development.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="row">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <div class="contact-form">
+            <form id="contactForm" action="mailto:info@mamcu.co.tz" method="POST" enctype="text/plain" onsubmit="return validateForm(event)">
+              <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" required>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane me-2"></i>Send Message
+              </button>
+              <div id="formStatus" class="alert mt-3" style="display: none;"></div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="contact-info">
+            <h4 class="mb-4">Get in Touch</h4>
+            <div class="contact-info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <h6>Address</h6>
+                <p class="mb-0">MAMCU Headquarters, Ushirika Building Tanu Road, Mtwara Region, Tanzania</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="fas fa-phone"></i>
+              <div>
+                <h6>Phone</h6>
+                <p class="mb-0">+255 023 233 3282 </p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <h6>Email</h6>
+                <p class="mb-0">info@mamcu.co.tz</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <i class="fas fa-clock"></i>
+              <div>
+                <h6>Office Hours</h6>
+                <p class="mb-0">Monday - Friday: 8:00 AM - 5:00 PM</p>
+              </div>
+            </div>
+            
+            <h5 class="mt-5 mb-3">Follow Us</h5>
+            <div class="social-links">
+              <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+              <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/gmmamcultd/?hl=en" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+              <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Top Button -->
+  <a href="#" id="back-to-top" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5 class="mb-4">About MAMCU</h5>
+          <p>Masasi Mtwara Cooperative Union (MAMCU) is a farmer-centered cooperative that empowers local farmers through reliable markets, fair payments, and agricultural support services.</p>
+          <div class="social-links mt-3">
+            <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+            <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/gmmamcultd/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <div class="mt-4">
+            <img src="assets/mamcu-logo.png" alt="MAMCU Logo" class="img-fluid" style="max-width: 150px;">
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5 class="mb-4">Quick Links</h5>
+          <ul class="list-unstyled footer-links">
+            <li class="mb-2"><a href="#about">About Us</a></li>
+            <li class="mb-2"><a href="#crops">Our Crops</a></li>
+            <li class="mb-2"><a href="#services">Services</a></li>
+            <li class="mb-2"><a href="#farmers">For Farmers</a></li>
+            <li class="mb-2"><a href="#market">Market Information</a></li>
+            <li class="mb-2"><a href="#news">News & Updates</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-4">Contact Information</h5>
+          <p><i class="fas fa-map-marker-alt me-2"></i> MAMCU Headquarters, Tanu Road, Mtwara Region, Tanzania</p>
+          <p><i class="fas fa-phone me-2"></i> +255 123 456 789</p>
+          <p><i class="fas fa-envelope me-2"></i> info@mamcu.co.tz</p>
+          <p><i class="fas fa-clock me-2"></i> Monday - Friday: 8:00 AM - 5:00 PM</p>
+        </div>
+      </div>
+      <div class="copyright text-center">
+        <p>&copy; 2025 Masasi Mtwara Cooperative Union (MAMCU). All Rights Reserved.</p>
+        <p class="mt-2"><small>Developed by <a href="mailto:support@mamcu.co.tz" style="color: #007bff; text-decoration: none; transition: color 0.3s ease;" onmouseover="this.style.color='#0056b3'" onmouseout="this.style.color='#007bff'">MAMCU IT DEPARTMENT</a></small></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="imageLightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-content" id="lightboxImage">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); changeImage(-1)">&#10094;</button>
+    <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); changeImage(1)">&#10095;</button>
+  </div>
+
+  <!-- Back to Top Button -->
+  <a href="#" id="back-to-top" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Cashew Modal -->
+  <div class="modal fade" id="cashewModal" tabindex="-1" aria-labelledby="cashewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cashewModalLabel">MAMCU Premium Cashew Nuts</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="max-height: 85vh; overflow-y: auto;">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="row">
+                <div class="col-6 mb-4">
+                  <img src="assets/cashew-nuts.jpg" alt="Premium Cashew Nuts" class="img-fluid rounded w-100" style="object-fit: cover; height: 200px;">
+                </div>
+                <div class="col-6 mb-4">
+                  <img src="assets/cashew 1.jpg.webp" alt="Cashew Processing" class="img-fluid rounded w-100" style="object-fit: cover; height: 200px;">
+                </div>
+                <div class="col-6 mb-4">
+                  <img src="assets/cashew 2.jpg" alt="Cashew Farming Community" class="img-fluid rounded w-100" style="object-fit: cover; height: 200px;">
+                </div>
+                <div class="col-6 mb-4">
+                  <img src="assets/cashew 3.jpg" alt="Cashew Quality Control" class="img-fluid rounded w-100" style="object-fit: cover; height: 200px;">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="mb-3">
+                <p>Masasi regions. With decades of experience in cashew production, collection, and export, MAMCU ensures that every batch of nuts meets international standards for quality and freshness. The cooperative manages the entire process — from farm-level harvesting to sorting, grading, and packaging — ensuring transparency and consistency for every buyer.</p>
+              </div>
+              <div class="mb-3">
+                <p>MAMCU cashew nuts are known for their rich flavor, excellent kernel yield, and naturally clean processing. The union works closely with farmers to promote good agricultural practices, ensuring that the nuts are organically grown and sun-dried to preserve their natural taste and quality. Buyers can expect uniform sizes, well-dried shells, and minimal moisture content — ideal for both roasting and industrial processing. The nuts are carefully inspected and graded before export, making them suitable for a wide range of international markets, including food processors, wholesalers, and retailers.</p>
+              </div>
+              <div class="mb-3">
+                <p>For new buyers, working with MAMCU LTD offers not only a reliable supply of premium cashew nuts but also a partnership rooted in trust, professionalism, and sustainability. The cooperative operates with full government registration and certification, guaranteeing legal and ethical trade. MAMCU provides flexible purchasing options, clear documentation, and logistical support for both domestic and export orders. By sourcing cashew nuts from MAMCU, buyers contribute to empowering local farmers, supporting community development, and strengthening Tanzania's agricultural economy.</p>
+              </div>
+              <div class="mb-3">
+                <p>Quality control is at the heart of MAMCU's cashew processing operations. Our state-of-the-art facilities employ rigorous testing procedures and modern equipment to ensure each batch meets the highest standards. From moisture content analysis to size grading and quality checks, every step is carefully monitored and documented. This dedication to quality has earned MAMCU a reputation for excellence in the global cashew market, making us a preferred supplier for discerning buyers worldwide.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sesame Modal -->
+  <div class="modal fade" id="sesameModal" tabindex="-1" aria-labelledby="sesameModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sesameModalLabel">MAMCU Premium Sesame Seeds</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4 mb-3 mb-md-0">
+              <img src="assets/sesame-seeds.jpg" alt="Premium Sesame Seeds" class="img-fluid rounded">
+            </div>
+            <div class="col-md-8">
+              <div class="mb-4">
+                <p>Masasi Mtwara Cooperative Union (MAMCU LTD) is one of the leading suppliers of high-quality sesame seeds in southern Tanzania. The union works directly with thousands of smallholder farmers who cultivate sesame using natural and sustainable farming practices. MAMCU LTD collects, processes, and markets sesame seeds from its member cooperative societies, ensuring that buyers receive clean, well-dried, and uniformly graded products. With years of experience in crop aggregation and export, the union guarantees consistency, transparency, and reliability in every delivery.</p>
+              </div>
+              <div class="mb-4">
+                <p>The sesame seeds from MAMCU LTD are known for their high oil content, purity, and excellent flavor, making them suitable for both industrial processing and direct consumption. The union follows strict quality control measures during harvesting, cleaning, and packaging to maintain international standards. Buyers can request both hulled and unhulled sesame seeds, depending on their needs. MAMCU LTD also provides full traceability from farm to market, giving customers confidence in the origin and integrity of the product.</p>
+              </div>
+              <div>
+                <p>For new buyers, partnering with MAMCU LTD means working with a trusted and farmer-centered organization that values long-term relationships. The union offers flexible supply arrangements, competitive pricing, and efficient logistics for local and international orders. By sourcing sesame seeds from MAMCU LTD, buyers not only gain access to premium-quality products but also support thousands of small-scale farmers who depend on sesame cultivation for their livelihoods. MAMCU LTD remains committed to integrity, quality, and mutual growth with all its trading partners.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pigeon Peas Modal -->
+  <div class="modal fade" id="pigeonModal" tabindex="-1" aria-labelledby="pigeonModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pigeonModalLabel">MAMCU Premium Pigeon Peas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4 mb-3 mb-md-0">
+              <img src="assets/pigeon-peas.jpg" alt="Premium Pigeon Peas" class="img-fluid rounded">
+            </div>
+            <div class="col-md-8">
+              <div class="mb-4">
+                <p>Masasi Mtwara Cooperative Union (MAMCU LTD) is one of Tanzania's trusted suppliers of high-quality pigeon peas, produced by its network of dedicated smallholder farmers across the southern regions. The cooperative ensures that all pigeon peas are grown under natural conditions, without harmful chemicals, resulting in clean, nutritious, and export-standard grains. With years of experience in crop aggregation and export logistics, MAMCU LTD provides buyers with reliable, large-scale supply while maintaining consistent quality and timely delivery.</p>
+              </div>
+              <div class="mb-4">
+                <p>MAMCU LTD's pigeon peas are carefully sorted, graded, and processed to meet both local and international market requirements. The union follows strict post-harvest handling procedures—such as proper drying, cleaning, and packaging—to preserve the natural color, flavor, and shelf life of the crop. Buyers can expect uniform grain size, low moisture content, and minimal impurities, making MAMCU pigeon peas ideal for food processing, wholesale trading, or direct consumption. The cooperative also offers flexible packaging and bulk supply options to meet the specific needs of different buyers.</p>
+              </div>
+              <div>
+                <p>By purchasing pigeon peas from MAMCU LTD, buyers not only receive top-quality produce but also support a sustainable farming system that empowers thousands of rural farmers. The cooperative reinvests profits into improving farmer training, infrastructure, and modern farming techniques to increase productivity and maintain consistent supply throughout the year. Partnering with MAMCU LTD guarantees not only premium-quality pigeon peas but also a transparent, ethical, and long-term business relationship built on trust, traceability, and shared growth.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Green Gram Modal -->
+  <div class="modal fade" id="greenGramModal" tabindex="-1" aria-labelledby="greenGramModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="greenGramModalLabel">MAMCU Premium Green Gram</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-4 mb-3 mb-md-0">
+              <img src="assets/green-gram.png" alt="Premium Green Gram" class="img-fluid rounded">
+            </div>
+            <div class="col-md-8">
+              <div class="mb-4">
+                <p>Masasi Mtwara Cooperative Union (MAMCU LTD) is proud to introduce Green Gram (mung beans) as one of its newly added agricultural crops for trade. Known for its rich nutritional value and growing demand both locally and internationally, Green Gram represents an exciting new opportunity for buyers and farmers alike. MAMCU LTD, with its long-standing experience in managing and marketing crops such as cashew nuts and sesame, now extends its expertise to ensure the production and supply of high-quality Green Gram from the fertile lands of southern Tanzania.</p>
+              </div>
+              <div class="mb-4">
+                <p>This new crop is cultivated by MAMCU member farmers under close supervision to guarantee consistency, purity, and quality. The Green Gram is carefully harvested, cleaned, and graded using modern techniques to meet export and domestic standards. Buyers can expect well-dried, naturally grown mung beans with high protein content and excellent cooking quality. MAMCU ensures traceability from farm to market, providing transparency and confidence for new partners interested in sourcing premium Tanzanian Green Gram.</p>
+              </div>
+              <div>
+                <p>As this is a newly introduced crop under MAMCU LTD, the union welcomes new buyers and trading partners to join hands in building a sustainable and mutually beneficial market network. With established logistics systems, reliable farmer networks, and a commitment to fair trade, MAMCU guarantees both quality supply and professional service. By purchasing Green Gram from MAMCU LTD, buyers not only gain access to top-quality produce but also contribute to the empowerment of local farmers and the growth of Tanzania's agricultural economy.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Create global translations variable
+    let translations;
+  </script>
+  <script src="assets/js/translations.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Language switcher functionality
+      const langToggle = document.getElementById('langToggle');
+      const langDisplay = langToggle.querySelector('.current-lang');
+      
+      // Initialize language
+      let currentLang = localStorage.getItem('language') || 'en';
+      langDisplay.textContent = currentLang.toUpperCase();
+      
+      // Initial translation
+      translatePage(currentLang);
+
+      // Language toggle click handler
+      langToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        currentLang = currentLang === 'en' ? 'sw' : 'en';
+        langDisplay.textContent = currentLang.toUpperCase();
+        translatePage(currentLang);
+        localStorage.setItem('language', currentLang);
+      });
+
+      // Translation function
+      function translatePage(lang) {
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+          const key = element.getAttribute('data-translate');
+          if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+          }
+        });
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Theme Switcher Script -->
+  <script>
+    // Initialize theme functionality immediately
+    (function() {
+      function initTheme() {
+        const themeToggle = document.getElementById('themeToggle');
+        if (!themeToggle) {
+          console.error('Theme toggle button not found');
+          return;
+        }
+
+        const icon = themeToggle.querySelector('i');
+        if (!icon) {
+          console.error('Theme toggle icon not found');
+          return;
+        }
+
+        // Get the initial theme
+        let currentTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        // Function to update theme
+        function setTheme(theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+          localStorage.setItem('theme', theme);
+          console.log('Theme set to:', theme); // Debug log
+        }
+
+        // Set initial theme
+        setTheme(currentTheme);
+
+        // Handle click events
+        themeToggle.addEventListener('click', () => {
+          console.log('Theme toggle clicked'); // Debug log
+          currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          setTheme(currentTheme);
+        });
+      }
+
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTheme);
+      } else {
+        initTheme();
+      }
+    })();
+  </script>
+
+  <!-- Scroll to Top Button -->
+  <div id="scrollToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <style>
+    #scrollToTop {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: var(--primary);
+      color: #fff;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+    }
+
+    #scrollToTop:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    #scrollToTop.show {
+      display: flex;
+    }
+
+    [data-theme="dark"] #scrollToTop {
+      background-color: var(--primary-light);
+    }
+
+    [data-theme="dark"] #scrollToTop:hover {
+      background-color: var(--primary);
+    }
+  </style>
+
+  <script>
+    // Scroll to Top Button functionality
+    window.addEventListener('scroll', function() {
+      const scrollButton = document.getElementById('scrollToTop');
+      if (window.pageYOffset > 300) {
+        scrollButton.classList.add('show');
+      } else {
+        scrollButton.classList.remove('show');
+      }
+    });
+  </script>
+
+  <script id="app-script">
+    // Lightbox functionality
+    let currentImageIndex = 0;
+    const galleryItems = [];
+
+    function initGallery() {
+      // Clear existing items
+      galleryItems.length = 0;
+      
+      // Get only the original slides (not the duplicates created by Swiper)
+      const originalSlides = Array.from(document.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate) .gallery-item'));
+      
+      originalSlides.forEach((item, index) => {
+        const imgSrc = item.querySelector('img').src;
+        const title = item.getAttribute('data-title');
+        const description = item.getAttribute('data-description');
+        galleryItems.push({ src: imgSrc, title, description });
+      });
+      
+      console.log('Gallery initialized with', galleryItems.length, 'items'); // Debug log
+    }
+
+    function openLightbox(element) {
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImg = document.getElementById('lightboxImage');
+      const caption = document.getElementById('lightboxCaption');
+      
+      // Get the image source from the clicked element
+      const clickedImage = element.querySelector('img');
+      const clickedSrc = clickedImage.src;
+      
+      // Find the matching image index in our gallery items
+      currentImageIndex = galleryItems.findIndex(item => {
+        // Remove any URL parameters or hashes from the comparison
+        const cleanItemSrc = item.src.split('?')[0].split('#')[0];
+        const cleanClickedSrc = clickedSrc.split('?')[0].split('#')[0];
+        return cleanItemSrc === cleanClickedSrc;
+      });
+      
+      if (currentImageIndex === -1) {
+        console.error('Image not found in gallery items');
+        return;
+      }
+      
+      // Set image and caption
+      lightboxImg.src = galleryItems[currentImageIndex].src;
+      caption.textContent = `${galleryItems[currentImageIndex].title} - ${galleryItems[currentImageIndex].description}`;
+      
+      // Show lightbox with animation
+      lightbox.classList.add('show');
+      
+      // Prevent body scrolling
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('imageLightbox');
+      lightbox.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function changeImage(direction) {
+      currentImageIndex = (currentImageIndex + direction + galleryItems.length) % galleryItems.length;
+      const lightboxImg = document.getElementById('lightboxImage');
+      const caption = document.getElementById('lightboxCaption');
+      
+      lightboxImg.src = galleryItems[currentImageIndex].src;
+      caption.textContent = `${galleryItems[currentImageIndex].title} - ${galleryItems[currentImageIndex].description}`;
+    }
+
+    // Handle keyboard and touch navigation
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('imageLightbox').classList.contains('show')) return;
+      
+      switch(e.key) {
+        case 'Escape':
+          closeLightbox();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          changeImage(-1);
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          changeImage(1);
+          break;
+      }
+    });
+
+    // Touch events for mobile swipe
+    document.getElementById('imageLightbox').addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    document.getElementById('imageLightbox').addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+          // Swiped left - next image
+          changeImage(1);
+        } else {
+          // Swiped right - previous image
+          changeImage(-1);
+        }
+      }
+    }
+
+    // Initialize gallery on page load
+    document.addEventListener('DOMContentLoaded', initGallery);
+
+    // Initialize Swiper
+    const swiper = new Swiper('.swiper', {
+      // Optional parameters
+      loop: true,
+      speed: 800,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      
+      // Enable smooth sliding effect
+      effect: 'slide',
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      
+      // Add space between slides
+      spaceBetween: 20,
+      
+      // Pagination
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      
+      // Responsive breakpoints
+      breakpoints: {
+        // Mobile devices
+        320: {
+          slidesPerView: 1.2,
+          spaceBetween: 10,
+          centeredSlides: true,
+        },
+        // Tablets
+        768: {
+          slidesPerView: 2.2,
+          spaceBetween: 15,
+          centeredSlides: true,
+        },
+        // Desktop
+        1024: {
+          slidesPerView: 3.2,
+          spaceBetween: 20,
+          centeredSlides: true,
+        },
+        // Large desktop
+        1400: {
+          slidesPerView: 4.2,
+          spaceBetween: 25,
+          centeredSlides: true,
+        }
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Contact form handling
+    function validateForm(event) {
+      const form = document.getElementById('contactForm');
+      const statusDiv = document.getElementById('formStatus');
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      // Clear previous status
+      statusDiv.style.display = 'none';
+      statusDiv.className = 'alert mt-3';
+
+      // Basic validation
+      if (!name || !email || !subject || !message) {
+        statusDiv.className = 'alert alert-danger mt-3';
+        statusDiv.textContent = 'Please fill in all fields.';
+        statusDiv.style.display = 'block';
+        return false;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        statusDiv.className = 'alert alert-danger mt-3';
+        statusDiv.textContent = 'Please enter a valid email address.';
+        statusDiv.style.display = 'block';
+        return false;
+      }
+
+      // Prepare email body
+      const body = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`;
+      
+      // Set the form body
+      form.action = `mailto:info@mamcu.co.tz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      // Show sending status
+      statusDiv.className = 'alert alert-info mt-3';
+      statusDiv.textContent = 'Opening your email client...';
+      statusDiv.style.display = 'block';
+
+      // Return true to allow form submission
+      return true;
+    }
+
+    // Add copy email functionality
+    document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const email = this.href.replace('mailto:', '');
+        navigator.clipboard.writeText(email).then(() => {
+          const tooltip = document.createElement('div');
+          tooltip.className = 'copy-tooltip';
+          tooltip.textContent = 'Email copied!';
+          this.appendChild(tooltip);
+          setTimeout(() => tooltip.remove(), 2000);
+        });
+      });
+    });
+
+    // Removed unused price chart code
+
+    // Save draft message to localStorage
+    const messageField = document.getElementById('message');
+    if (messageField) {
+      // Check if there's a saved draft
+      const savedMessage = localStorage.getItem('contactMessageDraft');
+      if (savedMessage) {
+        messageField.value = savedMessage;
+      }
+      
+      // Save draft as user types
+      messageField.addEventListener('input', function() {
+        localStorage.setItem('contactMessageDraft', this.value);
+      });
+    }
+    
+    // Clear localStorage when form is submitted
+    document.getElementById('contactForm').addEventListener('submit', function() {
+      localStorage.removeItem('contactMessageDraft');
+    });
+    
+    // Simulate caching market prices in localStorage
+    const storePriceData = () => {
+      const priceData = {
+        cashew: 1200,
+        sesame: 850,
+        pigeon: 450,
+        timestamp: new Date().getTime()
+      };
+      
+      localStorage.setItem('marketPrices', JSON.stringify(priceData));
+    };
+    
+    // Check if we need to fetch new price data (older than 10 minutes)
+    const checkPriceData = () => {
+      const storedData = localStorage.getItem('marketPrices');
+      
+      if (!storedData) {
+        storePriceData();
+        return;
+      }
+      
+      const priceData = JSON.parse(storedData);
+      const now = new Date().getTime();
+      const tenMinutes = 10 * 60 * 1000;
+      
+      if ((now - priceData.timestamp) > tenMinutes) {
+        // Data is older than 10 minutes, refresh it
+        storePriceData();
+      }
+    };
+    
+    // Initialize price data caching
+    checkPriceData();
+
+    // Back to Top Button Functionality
+    function initBackToTop() {
+      const backToTopButton = document.getElementById('back-to-top');
+      if (!backToTopButton) return;
+      
+      // Show button when page is scrolled
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('active');
+        } else {
+          backToTopButton.classList.remove('active');
+        }
+      }
+      
+      // Add scroll event listener
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      // Initial check
+      toggleBackToTop();
+      
+      // Smooth scroll to top when button is clicked
+      backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // Initialize back to top button
+    initBackToTop();
+
+    // Simple Theme Switching Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the theme toggle button
+      const themeToggle = document.getElementById('themeToggle');
+      const icon = themeToggle.querySelector('i');
+      
+      // Function to update the theme
+      function updateTheme(isDark) {
+        // Update root element
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        
+        // Update icon
+        icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        
+        // Store preference
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        
+        console.log('Theme updated:', isDark ? 'dark' : 'light'); // Debug log
+      }
+      
+      // Set initial theme
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('theme');
+      const isDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+      updateTheme(isDark);
+      
+      // Toggle theme on click
+      themeToggle.addEventListener('click', function() {
+        console.log('Theme toggle clicked'); // Debug log
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        updateTheme(currentTheme !== 'dark');
+      });
+      
+      // Add keyboard support
+      themeToggle.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          console.log('Theme toggle triggered by keyboard'); // Debug log
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          updateTheme(currentTheme !== 'dark');
+        }
+      });
+    });
+  </script>
+  <!-- Service Worker registration for PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(reg) {
+          console.log('Service Worker registered with scope:', reg.scope);
+        }).catch(function(err) {
+          console.warn('Service Worker registration failed:', err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
